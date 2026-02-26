@@ -44,7 +44,7 @@ async def introduce(ctx):
     await ctx.send(response)
 
 @bot.command(name='settime', help='Set your timezone to calculate resin full time')
-async def calculate_resin(ctx, current_hour: int):
+async def set_time(ctx, current_hour: int):
     if current_hour < 0 or current_hour > 23:
         response = "Traveler, your current hour must between 0AM and 23PM!"
         await ctx.send(response)
@@ -58,10 +58,6 @@ async def calculate_resin(ctx, current_hour: int):
         response += ", ".join(result) + "\n"
         response += "Please run the `!resin` command to check"
         await ctx.send(response)
-
-async def introduce(ctx):
-    response = "I am The Traveler's Emergency Food and his best companion!"
-    await ctx.send(response)
 
 @bot.command(name='resin', help="!resin [CURRENT RESIN]: Paimon calculates when the resin will be full.")
 async def calculate_resin(ctx, current_resin: int):
