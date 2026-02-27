@@ -11,7 +11,7 @@ from artifact import Artifact
 from domain import Domain
 
 from bs4 import BeautifulSoup
-import requests
+import aiohttp
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -27,7 +27,9 @@ bot = commands.Bot(command_prefix='!', activity=activity, status=discord.Status.
 @bot.command(name='event', help='Information on current events')
 async def get_events(ctx):
     url = "https://genshin-impact.fandom.com/wiki/Events"
-    html_content = requests.get(url).text
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            html_content = await resp.text()
     soup = BeautifulSoup(html_content, "lxml")
     tables = soup.find_all('table')
     cells = tables[1].findChildren('td')
