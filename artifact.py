@@ -48,16 +48,18 @@ class Artifact(object):
             self.main_stat = ("ATK", MAIN_STAT_VALUES["ATK"][level])
         elif type == "sands":
             rand = random.random()
-            for i in range(len(SANDS_MAIN_STAT)):
-                if rand < SANDS_MAIN_STAT[i][1]:
-                    main_stat = SANDS_MAIN_STAT[i][0]
+            main_stat = SANDS_MAIN_STAT[-1][0]
+            for stat, threshold in SANDS_MAIN_STAT:
+                if rand < threshold:
+                    main_stat = stat
                     break
             self.main_stat = (main_stat, MAIN_STAT_VALUES[main_stat][level])
         elif type == "goblet":
             rand = random.random()
-            for i in range(len(GOBLET_MAIN_STAT)):
-                if rand < GOBLET_MAIN_STAT[i][1]:
-                    main_stat = GOBLET_MAIN_STAT[i][0]
+            main_stat = GOBLET_MAIN_STAT[-1][0]
+            for stat, threshold in GOBLET_MAIN_STAT:
+                if rand < threshold:
+                    main_stat = stat
                     break
             if main_stat not in ["HP%", "ATK%", "DEF%", "Elemental Mastery", "Physical DMG Bonus%"]:
                 key = "Elemental DMG Bonus%"
@@ -66,9 +68,10 @@ class Artifact(object):
             self.main_stat = (main_stat, MAIN_STAT_VALUES[key][level])
         else:
             rand = random.random()
-            for i in range(len(CIRCLET_MAIN_STAT)):
-                if rand < CIRCLET_MAIN_STAT[i][1]:
-                    main_stat = CIRCLET_MAIN_STAT[i][0]
+            main_stat = CIRCLET_MAIN_STAT[-1][0]
+            for stat, threshold in CIRCLET_MAIN_STAT:
+                if rand < threshold:
+                    main_stat = stat
                     break
             self.main_stat = (main_stat, MAIN_STAT_VALUES[main_stat][level])
 
