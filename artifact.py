@@ -83,7 +83,7 @@ class Artifact(object):
             sub_stats = (("ATK" if type == "flower" else "HP", 0.1579), ("DEF", 0.3518), ("HP%", 0.4211), ("ATK%", 0.5264), ("DEF%", 0.6317), 
                         ("Energy Recharge%", 0.737), ("Elemental Mastery", 0.8423), ("Crit Rate%", 0.9212), ("Crit DMG%", 1))
         else:
-            if self.main_stat == "Energy Recharge%":
+            if self.main_stat[0] == "Energy Recharge%":
                 sub_stats = (("HP", 0.15), ("ATK", 0.30), ("DEF", 0.45), ("HP%", 0.55), ("ATK%", 0.65), ("DEF%", 0.75), 
                         ("Elemental Mastery", 0.85), 
                         ("Crit Rate%", 0.925), ("Crit DMG%", 1))
