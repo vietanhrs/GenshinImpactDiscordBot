@@ -1,4 +1,5 @@
 from datetime import datetime
+from pytz import timezone
 
 class Domain(object):
     def __init__(self):
@@ -40,9 +41,9 @@ class Domain(object):
         }
         self.weapon[3], self.weapon[4], self.weapon[5] = self.weapon[0], self.weapon[1], self.weapon[2]
 
-    def get_output(self, type):
+    def get_output(self, type, tz=None):
         weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-        day = datetime.now().weekday()
+        day = datetime.now(timezone(tz)).weekday() if tz else datetime.now().weekday()
         if day == 6:
             return ["Traveler, it is the weekend! In Sunday you can farm anything!"]
         else:

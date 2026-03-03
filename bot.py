@@ -55,6 +55,9 @@ async def set_time(ctx, current_hour: int):
         for zone in all_timezones:
             if datetime.now(timezone(zone)).hour == current_hour:
                 result.append(zone)
+        if not result:
+            await ctx.send("Traveler, I couldn't find a timezone matching that hour. Please try again!")
+            return
         USERS_TIMEZONE[ctx.message.author.id] = result[0]
         response = "Traveler, your timezone has been set among these:\n"
         response += ", ".join(result) + "\n"
@@ -112,7 +115,8 @@ async def get_resource(ctx, type="all"):
         await ctx.send(message)
     else:
         domain = Domain()
-        messages = domain.get_output(type)
+        user_tz = USERS_TIMEZONE.get(ctx.message.author.id)
+        messages = domain.get_output(type, tz=user_tz)
         await ctx.send('\n'.join(messages))
 
 @bot.event
